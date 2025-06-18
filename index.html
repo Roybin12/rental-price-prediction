@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חזית להשכרת דירה</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            display: grid;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        input, select {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f5e8;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .result h3 {
+            color: #2d5a2d;
+            margin: 0 0 10px 0;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e4d1e;
+        }
+        .error {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ffe8e8;
+            border: 2px solid #ff4444;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .error h3 {
+            color: #cc0000;
+            margin: 0 0 10px 0;
+        }
+        .error p {
+            color: #aa0000;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>מערכת חיזוי מחיר שכירות דירה</h2>
+
+        <form action="/" method="post">
+            <div class="form-group">
+                <label for="room_num">מספר חדרים:</label>
+                <input type="number" step="0.5" name="room_num" id="room_num" required>
+            </div>
+
+            <div class="form-group">
+                <label for="area">שטח (מ"ר):</label>
+                <input type="number" step="any" name="area" id="area" required>
+            </div>
+
+            <div class="form-group">
+                <label for="monthly_arnona">ארנונה חודשית (₪):</label>
+                <input type="number" step="any" name="monthly_arnona" id="monthly_arnona" required>
+            </div>
+
+            <div class="form-group">
+                <label for="floor">מספר קומה:</label>
+                <input type="number" step="any" name="floor" id="floor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="property_type">סוג הנכס:</label>
+                <select name="property_type" id="property_type" required>
+                    <option value="">בחר סוג נכס</option>
+                    <option value="דירה">דירה</option>
+                    <option value="דירה להשכרה">דירה להשכרה</option>
+                    <option value="דירת גן">דירת גן</option>
+                    <option value="דירת גן להשכרה">דירת גן להשכרה</option>
+                    <option value="גג/פנטהאוז">גג/פנטהאוז</option>
+                    <option value="גג/פנטהאוז להשכרה">גג/פנטהאוז להשכרה</option>
+                    <option value="פרטי/קוטג'">פרטי/קוטג'</option>
+                    <option value="בית פרטי/ קוטג'">בית פרטי/ קוטג'</option>
+                    <option value="דופלקס">דופלקס</option>
+                    <option value="דו משפחתי">דו משפחתי</option>
+                    <option value="סטודיו/לופט">סטודיو/לופט</option>
+                    <option value="יחידת דיור">יחידת דיור</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="is_furnished">האם מרוהט:</label>
+                <select name="is_furnished" id="is_furnished" required>
+                    <option value="">בחר...</option>
+                    <option value="0">לא מרוהט</option>
+                    <option value="1">מרוהט</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="has_parking">האם יש חניה:</label>
+                <select name="has_parking" id="has_parking" required>
+                    <option value="">בחר...</option>
+                    <option value="0">אין חניה</option>
+                    <option value="1">יש חניה</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="neighborhood">שכונה:</label>
+                <select name="neighborhood" id="neighborhood" required>
+                    <option value="">בחר שכונה</option>
+                    <option value="לב תל אביב החלק הצפוני">לב תל אביב החלק הצפוני</option>
+                    <option value="לב תל אביב החלק הדרומי">לב תל אביב החלק הדרומי</option>
+                    <option value="הצפון החדש סביבת ככר המדינה">הצפון החדש סביבת ככר המדינה</option>
+                    <option value="הצפון החדש החלק הצפוני">הצפון החדש החלק הצפוני</option>
+                    <option value="הצפון החדש החלק הדרומי">הצפון החדש החלק הדרומי</option>
+                    <option value="רמת אביב">רמת אביב</option>
+                    <option value="רמת אביב החדשה">רמת אביב החדשה</option>
+                    <option value="רמת אביב ג">רמת אביב ג</option>
+                    <option value="רמת החייל">רמת החייל</option>
+                    <option value="רמת הטייסים">רמת הטייסים</option>
+                    <option value="נמל תל אביב">נמל תל אביב</option>
+                    <option value="פלורנטין">פלורנטין</option>
+                    <option value="נוה צדק">נוה צדק</option>
+                    <option value="שבזי">שבזי</option>
+                    <option value="כרם התימנים">כרם התימנים</option>
+                </select>
+            </div>
+
+            <input type="submit" value="חזה מחיר שכירות">
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h3>תוצאת החיזוי</h3>
+            <p class="price">המחיר החזוי לשכירות: {{ "%.0f"|format(prediction) }} ₪ לחודש</p>
+        </div>
+        {% endif %}
+
+        {% if error_message %}
+        <div class="error">
+            <h3>שגיאה</h3>
+            <p>{{ error_message }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
